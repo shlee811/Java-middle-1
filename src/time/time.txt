@@ -196,7 +196,7 @@ Epoch time(에포크 시간), 또는 Unix timestamp는 컴퓨터 시스템에서
 
 
 
-기간, 시간의 간격 - Duration, Period
+<기간, 시간의 간격 - Duration, Period>
 **시간의 개념은 크게 2가지로 표현할 수 있다.**
 -특정 시점의 시간(시각)
 이 프로젝트는 2013년 8월 16일 까지 완료해야해
@@ -233,3 +233,61 @@ Epoch time(에포크 시간), 또는 Unix timestamp는 컴퓨터 시스템에서
 앞으로 4년은 더 공부해야 해
 이 프로젝트는 3개월 남았어
 라면은 3분 동안 끓어야 해
+
+
+**특정 시점의 시간: `Temporal` (`TemporalAccessor` 포함) 인터페이스를 구현한다.
+구현으로 `LocalDateTime` , `LocalDate` , `LocalTime` , `ZonedDateTime` , `OffsetDateTime` ,`Instant` 등이 있다.
+
+**시간의 간격(기간): `TemporalAmount` 인터페이스를 구현한다.
+구현으로 `Period` , `Duration` 이 있다.
+
+**TemporalAccessor 인터페이스**
+날짜와 시간을 읽기 위한 기본 인터페이스
+이 인터페이스는 특정 시점의 날짜와 시간 정보를 읽을 수 있는 최소한의 기능을 제공한다.
+
+**Temporal 인터페이스**
+`TemporalAccessor` 의 하위 인터페이스로, 날짜와 시간을 조작(추가, 빼기 등)하기 위한 기능을 제공한다.
+이를 통해 날짜와 시간을 변경하거나 조정할 수 있다.
+간단히 말하면, `TemporalAccessor` 는 읽기 전용 접근을, `Temporal` 은 읽기와 쓰기(조작) 모두를 지원한다.
+
+**TemporalAmount 인터페이스**
+시간의 간격(시간의 양, 기간)을 나타내며, 날짜와 시간 객체에 적용하여 그 객체를 조정할 수 있다.
+예를 들어, 특정 날짜에 일정 기간을 더하거나 빼는 데 사용된다.
+
+
+<시간의 단위와 시간 필드>
+다음으로 설명할 날짜와 시간의 핵심 인터페이스는 시간의 단위를 뜻하는 `TemporalUnit` (`ChronoUnit` )과
+시간의 각 필드를 뜻하는 `TemporalField` (`ChronoField` )이다.
+
+**시간의 단위 - TemporalUnit, ChronoUnit
+`TemporalUnit` 인터페이스는 날짜와 시간을 측정하는 단위를 나타내며, 주로 사용되는 구현체는
+`java.time.temporal.ChronoUnit` 열거형으로 구현되어 있다.
+`ChronoUnit` 은 다양한 시간 단위를 제공한다.
+여기서 `Unit` 이라는 뜻을 번역하면 단위이다. 따라서 시간의 단위 하나하나를 나타낸다.
+
+<시간 필드 - ChronoField>
+`ChronoField` 는 날짜 및 시간을 나타내는 데 사용되는 열거형이다.
+이 열거형은 다양한 필드를 통해 **날짜와 시간의특정 부분을 나타낸다.**
+여기에는 연도, 월, 일, 시간, 분 등이 포함된다.
+`TemporalField` 인터페이스는 날짜와 시간을 나타내는데 사용된다.
+주로 사용되는 구현체는`java.time.temporal.ChronoField` 열거형으로 구현되어 있다.
+`ChronoField` 는 다양한 필드를 통해 날짜와 시간의 특정 부분을 나타낸다. 여기에는 연도, 월, 일, 시간, 분 등이 포함된다.
+여기서 필드(Field)라는 뜻이 날짜와 시간 중에 있는 특정 필드들을 뜻한다. 각각의 필드 항목은 다음을 참고하자.
+
+예를 들어 2024년 8월 16일이라고 하면 각각의 필드는 다음과 같다.
+`YEAR` : 2024
+`MONTH_OF_YEAR` : 8
+`DAY_OF_MONTH` : 16
+단순히 시간의 단위 하나하나를 뜻하는 `ChronoUnit` 과는 다른 것을 알 수 있다. `ChronoField` 를 사용해야
+날짜와 시간의 각 필드 중에 원하는 데이터를 조회할 수 있다.
+
+
+**정리**
+시간을 조회하고 조작하는 부분을 보면 `TemporalAccessor.get()` , `Temporal.plus()` 와 같은 인터페이스를
+통해 특정 구현 클래스와 무관하게 아주 일관성 있는 시간 조회, 조작 기능을 제공하는 것을 확인할 수 있다.
+덕분에 `LocalDateTime` , `LocalDate` , `LocalTime` , `ZonedDateTime` , `Instant` 와 같은 수 많은 구현에 관계없이
+일관성 있는 방법으로 시간을 조회하고 조작할 수 있다. 하지만 모든 시간 필드를 다 조회할 수 있는 것은 아니다.
+
+날짜와 시간 문자열 파싱과 포맷팅
+**포맷팅**: 날짜와 시간 데이터를 원하는 포맷의 문자열로 변경하는 것, `Date`=>`String`
+**파싱**: 문자열을 날짜와 시간 데이터로 변경하는 것, `String`=> `Date`

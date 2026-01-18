@@ -24,3 +24,7 @@ public class ChronoUnitMain {
         System.out.println("minutesBetween = " + minutesBetween);
     }
 }
+
+
+//ChronoUnit` 을 사용하면 두 날짜 또는 시간 사이의 차이를 해당 단위로 쉽게 계산할 수 있다.
+//예제 코드에서는 두 `LocalTime` 객체 사이의 차이를 초, 분 단위로 구한다.
