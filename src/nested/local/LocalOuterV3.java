@@ -35,3 +35,4 @@ public class LocalOuterV3 {
 //`process()`는 `Printer` 타입을 반환한다. 여기서는 `LocalPrinter` 인스턴스를 반환한다.
 //여기서는 `LocalPrinter.print()` 메서드를 `process()` 안에서 실행하는 것이 아니라
 //`process()` 메서드가 종료된 이후에 `main()` 메서드에서 실행한다.
+s
