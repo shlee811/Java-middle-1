@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class MainV4 {
     public static void main(String[] args) {
         NetworkServiceV4 networkService = new NetworkServiceV4();
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("전송할 문자: ");
@@ -19,6 +20,7 @@ public class MainV4 {
             } catch (Exception e) { // 모든 예외를 잡아서 처리
                 exceptionHandler(e);
             }
+
             System.out.println();
         }
         System.out.println("프로그램을 정상 종료합니다.");
@@ -30,9 +32,10 @@ public class MainV4 {
         System.out.println("==개발자용 디버깅 메시지==");
         e.printStackTrace(System.out); // 스택 트레이스 출력
         //e.printStackTrace(); // System.err에 스택 트레이스 출력
+
         //필요하면 예외 별로 별도의 추가 처리 가능
         if (e instanceof SendExceptionV4 sendEx) {
-            System.out.println("[전송 오류] 전송 데이터: " + sendEx.getSendData());
+            System.out.println("[전송 오류] 전송 데이터:" + sendEx.getSendData());
         }
     }
 }
